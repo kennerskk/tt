@@ -4,7 +4,11 @@ const db = require('./db');
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || '*',
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get('/items', async (req, res) => {

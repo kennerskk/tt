@@ -1,6 +1,15 @@
 version: '3.8'
 
 services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - app-network
+
   api:
     build: .
     ports:

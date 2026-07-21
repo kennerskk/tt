@@ -11,7 +11,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get('/items', async (req, res) => {
+app.get('/api/items', async (req, res) => {
   try {
     const { rows } = await db.query('SELECT * FROM items ORDER BY id ASC');
     res.json(rows);
@@ -20,7 +20,7 @@ app.get('/items', async (req, res) => {
   }
 });
 
-app.get('/items/:id', async (req, res) => {
+app.get('/api/items/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { rows } = await db.query('SELECT * FROM items WHERE id = $1', [id]);
@@ -31,7 +31,7 @@ app.get('/items/:id', async (req, res) => {
   }
 });
 
-app.post('/items', async (req, res) => {
+app.post('/api/items', async (req, res) => {
   try {
     const { name, description } = req.body;
     const { rows } = await db.query(
@@ -44,7 +44,7 @@ app.post('/items', async (req, res) => {
   }
 });
 
-app.put('/items/:id', async (req, res) => {
+app.put('/api/items/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { name, description } = req.body;
@@ -59,7 +59,7 @@ app.put('/items/:id', async (req, res) => {
   }
 });
 
-app.delete('/items/:id', async (req, res) => {
+app.delete('/api/items/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { rows } = await db.query('DELETE FROM items WHERE id = $1 RETURNING *', [id]);
